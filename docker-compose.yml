@@ -1,0 +1,15 @@
+rabbitmq:
+  image: rabbitmq
+
+python:
+  image: python:2.7
+  links:
+    - rabbitmq
+
+dev:
+  build: .
+  links:
+    - rabbitmq
+  environment:
+    - RABBIT_HOST=rabbitmq
+    - EXCHANGE_NAME=github_api_events
